@@ -1,0 +1,1622 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	
+		<title>Clube &#8211; Amoraria</title><link rel="stylesheet" href="https://amoraria.com.br/wp-content/cache/min/1/1472d1c0c1a8d146d63b82801cb76254.css" media="all" data-minify="1" />
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<link rel="alternate" type="application/rss+xml" title="Feed para Amoraria &raquo;" href="https://amoraria.com.br/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Feed de comentários para Amoraria &raquo;" href="https://amoraria.com.br/comments/feed/" />
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:root { --wp--style--global--content-size: 800px;--wp--style--global--wide-size: 1200px; }:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.wp-site-blocks) > * { margin-block-start: 24px; margin-block-end: 0; }:where(.wp-site-blocks) > :first-child { margin-block-start: 0; }:where(.wp-site-blocks) > :last-child { margin-block-end: 0; }:root { --wp--style--block-gap: 24px; }:root :where(.is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.is-layout-flow) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.is-layout-constrained) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-flex){gap: 24px;}:root :where(.is-layout-grid){gap: 24px;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){text-decoration: underline;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+
+
+
+
+<style id='elementor-frontend-inline-css'>
+@-webkit-keyframes ha_fadeIn{0%{opacity:0}to{opacity:1}}@keyframes ha_fadeIn{0%{opacity:0}to{opacity:1}}@-webkit-keyframes ha_zoomIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}50%{opacity:1}}@keyframes ha_zoomIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}50%{opacity:1}}@-webkit-keyframes ha_rollIn{0%{opacity:0;-webkit-transform:translate3d(-100%,0,0) rotate3d(0,0,1,-120deg);transform:translate3d(-100%,0,0) rotate3d(0,0,1,-120deg)}to{opacity:1}}@keyframes ha_rollIn{0%{opacity:0;-webkit-transform:translate3d(-100%,0,0) rotate3d(0,0,1,-120deg);transform:translate3d(-100%,0,0) rotate3d(0,0,1,-120deg)}to{opacity:1}}@-webkit-keyframes ha_bounce{0%,20%,53%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}40%,43%{-webkit-transform:translate3d(0,-30px,0) scaleY(1.1);transform:translate3d(0,-30px,0) scaleY(1.1);-webkit-animation-timing-function:cubic-bezier(.755,.05,.855,.06);animation-timing-function:cubic-bezier(.755,.05,.855,.06)}70%{-webkit-transform:translate3d(0,-15px,0) scaleY(1.05);transform:translate3d(0,-15px,0) scaleY(1.05);-webkit-animation-timing-function:cubic-bezier(.755,.05,.855,.06);animation-timing-function:cubic-bezier(.755,.05,.855,.06)}80%{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1);-webkit-transform:translate3d(0,0,0) scaleY(.95);transform:translate3d(0,0,0) scaleY(.95)}90%{-webkit-transform:translate3d(0,-4px,0) scaleY(1.02);transform:translate3d(0,-4px,0) scaleY(1.02)}}@keyframes ha_bounce{0%,20%,53%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}40%,43%{-webkit-transform:translate3d(0,-30px,0) scaleY(1.1);transform:translate3d(0,-30px,0) scaleY(1.1);-webkit-animation-timing-function:cubic-bezier(.755,.05,.855,.06);animation-timing-function:cubic-bezier(.755,.05,.855,.06)}70%{-webkit-transform:translate3d(0,-15px,0) scaleY(1.05);transform:translate3d(0,-15px,0) scaleY(1.05);-webkit-animation-timing-function:cubic-bezier(.755,.05,.855,.06);animation-timing-function:cubic-bezier(.755,.05,.855,.06)}80%{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1);-webkit-transform:translate3d(0,0,0) scaleY(.95);transform:translate3d(0,0,0) scaleY(.95)}90%{-webkit-transform:translate3d(0,-4px,0) scaleY(1.02);transform:translate3d(0,-4px,0) scaleY(1.02)}}@-webkit-keyframes ha_bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1}}@keyframes ha_bounceIn{0%,20%,40%,60%,80%,to{-webkit-animation-timing-function:cubic-bezier(.215,.61,.355,1);animation-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1}}@-webkit-keyframes ha_flipInX{0%{opacity:0;-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}40%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{opacity:1;-webkit-transform:perspective(400px) rotate3d(1,0,0,10deg);transform:perspective(400px) rotate3d(1,0,0,10deg)}80%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-5deg);transform:perspective(400px) rotate3d(1,0,0,-5deg)}}@keyframes ha_flipInX{0%{opacity:0;-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}40%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{opacity:1;-webkit-transform:perspective(400px) rotate3d(1,0,0,10deg);transform:perspective(400px) rotate3d(1,0,0,10deg)}80%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-5deg);transform:perspective(400px) rotate3d(1,0,0,-5deg)}}@-webkit-keyframes ha_flipInY{0%{opacity:0;-webkit-transform:perspective(400px) rotate3d(0,1,0,90deg);transform:perspective(400px) rotate3d(0,1,0,90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}40%{-webkit-transform:perspective(400px) rotate3d(0,1,0,-20deg);transform:perspective(400px) rotate3d(0,1,0,-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{opacity:1;-webkit-transform:perspective(400px) rotate3d(0,1,0,10deg);transform:perspective(400px) rotate3d(0,1,0,10deg)}80%{-webkit-transform:perspective(400px) rotate3d(0,1,0,-5deg);transform:perspective(400px) rotate3d(0,1,0,-5deg)}}@keyframes ha_flipInY{0%{opacity:0;-webkit-transform:perspective(400px) rotate3d(0,1,0,90deg);transform:perspective(400px) rotate3d(0,1,0,90deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}40%{-webkit-transform:perspective(400px) rotate3d(0,1,0,-20deg);transform:perspective(400px) rotate3d(0,1,0,-20deg);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}60%{opacity:1;-webkit-transform:perspective(400px) rotate3d(0,1,0,10deg);transform:perspective(400px) rotate3d(0,1,0,10deg)}80%{-webkit-transform:perspective(400px) rotate3d(0,1,0,-5deg);transform:perspective(400px) rotate3d(0,1,0,-5deg)}}@-webkit-keyframes ha_swing{20%{-webkit-transform:rotate3d(0,0,1,15deg);transform:rotate3d(0,0,1,15deg)}40%{-webkit-transform:rotate3d(0,0,1,-10deg);transform:rotate3d(0,0,1,-10deg)}60%{-webkit-transform:rotate3d(0,0,1,5deg);transform:rotate3d(0,0,1,5deg)}80%{-webkit-transform:rotate3d(0,0,1,-5deg);transform:rotate3d(0,0,1,-5deg)}}@keyframes ha_swing{20%{-webkit-transform:rotate3d(0,0,1,15deg);transform:rotate3d(0,0,1,15deg)}40%{-webkit-transform:rotate3d(0,0,1,-10deg);transform:rotate3d(0,0,1,-10deg)}60%{-webkit-transform:rotate3d(0,0,1,5deg);transform:rotate3d(0,0,1,5deg)}80%{-webkit-transform:rotate3d(0,0,1,-5deg);transform:rotate3d(0,0,1,-5deg)}}@-webkit-keyframes ha_slideInDown{0%{visibility:visible;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@keyframes ha_slideInDown{0%{visibility:visible;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@-webkit-keyframes ha_slideInUp{0%{visibility:visible;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}}@keyframes ha_slideInUp{0%{visibility:visible;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}}@-webkit-keyframes ha_slideInLeft{0%{visibility:visible;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}}@keyframes ha_slideInLeft{0%{visibility:visible;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}}@-webkit-keyframes ha_slideInRight{0%{visibility:visible;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}}@keyframes ha_slideInRight{0%{visibility:visible;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}}.ha_fadeIn{-webkit-animation-name:ha_fadeIn;animation-name:ha_fadeIn}.ha_zoomIn{-webkit-animation-name:ha_zoomIn;animation-name:ha_zoomIn}.ha_rollIn{-webkit-animation-name:ha_rollIn;animation-name:ha_rollIn}.ha_bounce{-webkit-transform-origin:center bottom;-ms-transform-origin:center bottom;transform-origin:center bottom;-webkit-animation-name:ha_bounce;animation-name:ha_bounce}.ha_bounceIn{-webkit-animation-name:ha_bounceIn;animation-name:ha_bounceIn;-webkit-animation-duration:.75s;-webkit-animation-duration:calc(var(--animate-duration)*.75);animation-duration:.75s;animation-duration:calc(var(--animate-duration)*.75)}.ha_flipInX,.ha_flipInY{-webkit-animation-name:ha_flipInX;animation-name:ha_flipInX;-webkit-backface-visibility:visible!important;backface-visibility:visible!important}.ha_flipInY{-webkit-animation-name:ha_flipInY;animation-name:ha_flipInY}.ha_swing{-webkit-transform-origin:top center;-ms-transform-origin:top center;transform-origin:top center;-webkit-animation-name:ha_swing;animation-name:ha_swing}.ha_slideInDown{-webkit-animation-name:ha_slideInDown;animation-name:ha_slideInDown}.ha_slideInUp{-webkit-animation-name:ha_slideInUp;animation-name:ha_slideInUp}.ha_slideInLeft{-webkit-animation-name:ha_slideInLeft;animation-name:ha_slideInLeft}.ha_slideInRight{-webkit-animation-name:ha_slideInRight;animation-name:ha_slideInRight}.ha-css-transform-yes{-webkit-transition-duration:var(--ha-tfx-transition-duration, .2s);transition-duration:var(--ha-tfx-transition-duration, .2s);-webkit-transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform;-webkit-transform:translate(var(--ha-tfx-translate-x, 0),var(--ha-tfx-translate-y, 0)) scale(var(--ha-tfx-scale-x, 1),var(--ha-tfx-scale-y, 1)) skew(var(--ha-tfx-skew-x, 0),var(--ha-tfx-skew-y, 0)) rotateX(var(--ha-tfx-rotate-x, 0)) rotateY(var(--ha-tfx-rotate-y, 0)) rotateZ(var(--ha-tfx-rotate-z, 0));transform:translate(var(--ha-tfx-translate-x, 0),var(--ha-tfx-translate-y, 0)) scale(var(--ha-tfx-scale-x, 1),var(--ha-tfx-scale-y, 1)) skew(var(--ha-tfx-skew-x, 0),var(--ha-tfx-skew-y, 0)) rotateX(var(--ha-tfx-rotate-x, 0)) rotateY(var(--ha-tfx-rotate-y, 0)) rotateZ(var(--ha-tfx-rotate-z, 0))}.ha-css-transform-yes:hover{-webkit-transform:translate(var(--ha-tfx-translate-x-hover, var(--ha-tfx-translate-x, 0)),var(--ha-tfx-translate-y-hover, var(--ha-tfx-translate-y, 0))) scale(var(--ha-tfx-scale-x-hover, var(--ha-tfx-scale-x, 1)),var(--ha-tfx-scale-y-hover, var(--ha-tfx-scale-y, 1))) skew(var(--ha-tfx-skew-x-hover, var(--ha-tfx-skew-x, 0)),var(--ha-tfx-skew-y-hover, var(--ha-tfx-skew-y, 0))) rotateX(var(--ha-tfx-rotate-x-hover, var(--ha-tfx-rotate-x, 0))) rotateY(var(--ha-tfx-rotate-y-hover, var(--ha-tfx-rotate-y, 0))) rotateZ(var(--ha-tfx-rotate-z-hover, var(--ha-tfx-rotate-z, 0)));transform:translate(var(--ha-tfx-translate-x-hover, var(--ha-tfx-translate-x, 0)),var(--ha-tfx-translate-y-hover, var(--ha-tfx-translate-y, 0))) scale(var(--ha-tfx-scale-x-hover, var(--ha-tfx-scale-x, 1)),var(--ha-tfx-scale-y-hover, var(--ha-tfx-scale-y, 1))) skew(var(--ha-tfx-skew-x-hover, var(--ha-tfx-skew-x, 0)),var(--ha-tfx-skew-y-hover, var(--ha-tfx-skew-y, 0))) rotateX(var(--ha-tfx-rotate-x-hover, var(--ha-tfx-rotate-x, 0))) rotateY(var(--ha-tfx-rotate-y-hover, var(--ha-tfx-rotate-y, 0))) rotateZ(var(--ha-tfx-rotate-z-hover, var(--ha-tfx-rotate-z, 0)))}.happy-addon>.elementor-widget-container{word-wrap:break-word;overflow-wrap:break-word}.happy-addon>.elementor-widget-container,.happy-addon>.elementor-widget-container *{-webkit-box-sizing:border-box;box-sizing:border-box}.happy-addon:not(:has(.elementor-widget-container)),.happy-addon:not(:has(.elementor-widget-container)) *{-webkit-box-sizing:border-box;box-sizing:border-box;word-wrap:break-word;overflow-wrap:break-word}.happy-addon p:empty{display:none}.happy-addon .elementor-inline-editing{min-height:auto!important}.happy-addon-pro img{max-width:100%;height:auto;-o-object-fit:cover;object-fit:cover}.ha-screen-reader-text{position:absolute;overflow:hidden;clip:rect(1px,1px,1px,1px);margin:-1px;padding:0;width:1px;height:1px;border:0;word-wrap:normal!important;-webkit-clip-path:inset(50%);clip-path:inset(50%)}.ha-has-bg-overlay>.elementor-widget-container{position:relative;z-index:1}.ha-has-bg-overlay>.elementor-widget-container:before{position:absolute;top:0;left:0;z-index:-1;width:100%;height:100%;content:""}.ha-has-bg-overlay:not(:has(.elementor-widget-container)){position:relative;z-index:1}.ha-has-bg-overlay:not(:has(.elementor-widget-container)):before{position:absolute;top:0;left:0;z-index:-1;width:100%;height:100%;content:""}.ha-popup--is-enabled .ha-js-popup,.ha-popup--is-enabled .ha-js-popup img{cursor:-webkit-zoom-in!important;cursor:zoom-in!important}.mfp-wrap .mfp-arrow,.mfp-wrap .mfp-close{background-color:transparent}.mfp-wrap .mfp-arrow:focus,.mfp-wrap .mfp-close:focus{outline-width:thin}.ha-advanced-tooltip-enable{position:relative;cursor:pointer;--ha-tooltip-arrow-color:black;--ha-tooltip-arrow-distance:0}.ha-advanced-tooltip-enable .ha-advanced-tooltip-content{position:absolute;z-index:999;display:none;padding:5px 0;width:120px;height:auto;border-radius:6px;background-color:#000;color:#fff;text-align:center;opacity:0}.ha-advanced-tooltip-enable .ha-advanced-tooltip-content::after{position:absolute;border-width:5px;border-style:solid;content:""}.ha-advanced-tooltip-enable .ha-advanced-tooltip-content.no-arrow::after{visibility:hidden}.ha-advanced-tooltip-enable .ha-advanced-tooltip-content.show{display:inline-block;opacity:1}.ha-advanced-tooltip-enable.ha-advanced-tooltip-top .ha-advanced-tooltip-content,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-top .ha-advanced-tooltip-content{top:unset;right:0;bottom:calc(101% + var(--ha-tooltip-arrow-distance));left:0;margin:0 auto}.ha-advanced-tooltip-enable.ha-advanced-tooltip-top .ha-advanced-tooltip-content::after,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-top .ha-advanced-tooltip-content::after{top:100%;right:unset;bottom:unset;left:50%;border-color:var(--ha-tooltip-arrow-color) transparent transparent transparent;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}.ha-advanced-tooltip-enable.ha-advanced-tooltip-bottom .ha-advanced-tooltip-content,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-bottom .ha-advanced-tooltip-content{top:calc(101% + var(--ha-tooltip-arrow-distance));right:0;bottom:unset;left:0;margin:0 auto}.ha-advanced-tooltip-enable.ha-advanced-tooltip-bottom .ha-advanced-tooltip-content::after,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-bottom .ha-advanced-tooltip-content::after{top:unset;right:unset;bottom:100%;left:50%;border-color:transparent transparent var(--ha-tooltip-arrow-color) transparent;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}.ha-advanced-tooltip-enable.ha-advanced-tooltip-left .ha-advanced-tooltip-content,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-left .ha-advanced-tooltip-content{top:50%;right:calc(101% + var(--ha-tooltip-arrow-distance));bottom:unset;left:unset;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}.ha-advanced-tooltip-enable.ha-advanced-tooltip-left .ha-advanced-tooltip-content::after,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-left .ha-advanced-tooltip-content::after{top:50%;right:unset;bottom:unset;left:100%;border-color:transparent transparent transparent var(--ha-tooltip-arrow-color);-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}.ha-advanced-tooltip-enable.ha-advanced-tooltip-right .ha-advanced-tooltip-content,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-right .ha-advanced-tooltip-content{top:50%;right:unset;bottom:unset;left:calc(101% + var(--ha-tooltip-arrow-distance));-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}.ha-advanced-tooltip-enable.ha-advanced-tooltip-right .ha-advanced-tooltip-content::after,body[data-elementor-device-mode=tablet] .ha-advanced-tooltip-enable.ha-advanced-tooltip-tablet-right .ha-advanced-tooltip-content::after{top:50%;right:100%;bottom:unset;left:unset;border-color:transparent var(--ha-tooltip-arrow-color) transparent transparent;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-top .ha-advanced-tooltip-content{top:unset;right:0;bottom:calc(101% + var(--ha-tooltip-arrow-distance));left:0;margin:0 auto}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-top .ha-advanced-tooltip-content::after{top:100%;right:unset;bottom:unset;left:50%;border-color:var(--ha-tooltip-arrow-color) transparent transparent transparent;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-bottom .ha-advanced-tooltip-content{top:calc(101% + var(--ha-tooltip-arrow-distance));right:0;bottom:unset;left:0;margin:0 auto}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-bottom .ha-advanced-tooltip-content::after{top:unset;right:unset;bottom:100%;left:50%;border-color:transparent transparent var(--ha-tooltip-arrow-color) transparent;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-left .ha-advanced-tooltip-content{top:50%;right:calc(101% + var(--ha-tooltip-arrow-distance));bottom:unset;left:unset;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-left .ha-advanced-tooltip-content::after{top:50%;right:unset;bottom:unset;left:100%;border-color:transparent transparent transparent var(--ha-tooltip-arrow-color);-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-right .ha-advanced-tooltip-content{top:50%;right:unset;bottom:unset;left:calc(101% + var(--ha-tooltip-arrow-distance));-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}body[data-elementor-device-mode=mobile] .ha-advanced-tooltip-enable.ha-advanced-tooltip-mobile-right .ha-advanced-tooltip-content::after{top:50%;right:100%;bottom:unset;left:unset;border-color:transparent var(--ha-tooltip-arrow-color) transparent transparent;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}body.elementor-editor-active .happy-addon.ha-gravityforms .gform_wrapper{display:block!important}.ha-scroll-to-top-wrap.ha-scroll-to-top-hide{display:none}.ha-scroll-to-top-wrap.edit-mode,.ha-scroll-to-top-wrap.single-page-off{display:none!important}.ha-scroll-to-top-button{position:fixed;right:15px;bottom:15px;z-index:9999;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;align-items:center;-ms-flex-align:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;width:50px;height:50px;border-radius:50px;background-color:#5636d1;color:#fff;text-align:center;opacity:1;cursor:pointer;-webkit-transition:all .3s;transition:all .3s}.ha-scroll-to-top-button i{color:#fff;font-size:16px}.ha-scroll-to-top-button:hover{background-color:#e2498a}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel='stylesheet' id='happy-icons-css' href='https://amoraria.com.br/wp-content/plugins/happy-elementor-addons/assets/fonts/style.min.css?ver=3.20.1' media='all' />
+
+<style id='rocket-lazyload-inline-css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;cursor:pointer;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:72px;width:72px;left:50%;top:50%;margin-left:-36px;margin-top:-36px;position:absolute;background:url(https://amoraria.com.br/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat;cursor:pointer}.wp-has-aspect-ratio .rll-youtube-player{position:absolute;padding-bottom:0;width:100%;height:100%;top:0;bottom:0;left:0;right:0}
+</style>
+
+
+
+
+<link rel='stylesheet' id='elementor-icons-shared-1-css' href='https://amoraria.com.br/wp-content/plugins/happy-elementor-addons/assets/fonts/style.min.css?ver=3.20.1' media='all' />
+
+
+
+
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.32.2" id="font-awesome-4-shim-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/happy-elementor-addons/assets/vendor/dom-purify/purify.min.js?ver=3.1.6" id="dom-purify-js" defer></script>
+<link rel="https://api.w.org/" href="https://amoraria.com.br/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://amoraria.com.br/wp-json/wp/v2/pages/2565" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://amoraria.com.br/xmlrpc.php?rsd" />
+
+<link rel="canonical" href="https://amoraria.com.br/clube/" />
+<link rel='shortlink' href='https://amoraria.com.br/?p=2565' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://amoraria.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Famoraria.com.br%2Fclube%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://amoraria.com.br/wp-json/oembed/1.0/embed?url=https%3A%2F%2Famoraria.com.br%2Fclube%2F&#038;format=xml" />
+<meta name="generator" content="Elementor 3.32.2; features: additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
+<!-- Google Tag Manager -->
+<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WB7BF9N');</script>
+<!-- End Google Tag Manager -->
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+			<link rel="icon" href="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-270x270.png" />
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /></head>
+<body class="wp-singular page-template page-template-elementor_canvas page page-id-2565 wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-template-canvas elementor-kit-5 elementor-page elementor-page-2565">
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WB7BF9N"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+		<div data-elementor-type="wp-page" data-elementor-id="2565" class="elementor elementor-2565" data-elementor-settings="{&quot;ha_cmc_init_switcher&quot;:&quot;no&quot;}">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-95ab491 elementor-section-content-middle elementor-reverse-mobile elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="95ab491" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2344ab4" data-id="2344ab4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-b05076f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="b05076f" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-d4b96b7" data-id="d4b96b7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-db95956 elementor-widget elementor-widget-image" data-id="db95956" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img decoding="async" width="150" height="150" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-image-11" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-150x150.png 150w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-300x300.png 300w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-270x270.png 270w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-192x192.png 192w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-180x180.png 180w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-32x32.png 32w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo.png 512w" data-lazy-sizes="(max-width: 150px) 100vw, 150px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-150x150.png" /><noscript><img decoding="async" width="150" height="150" src="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-150x150.png" class="attachment-thumbnail size-thumbnail wp-image-11" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-150x150.png 150w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-300x300.png 300w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-270x270.png 270w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-192x192.png 192w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-180x180.png 180w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo-32x32.png 32w, https://amoraria.com.br/wp-content/uploads/2022/05/cropped-logo.png 512w" sizes="(max-width: 150px) 100vw, 150px" /></noscript>															</div>
+				</div>
+				<div class="elementor-element elementor-element-4b66d1d elementor-widget elementor-widget-heading" data-id="4b66d1d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Clube Amoraria</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2e29e40 elementor-widget elementor-widget-heading" data-id="2e29e40" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Desperte sua <b>criatividade, encontre paz interior e conecte-se consigo mesma</b> através do poder das mandalas, no Clube Amoraria.
+</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-d19bac9 elementor-widget elementor-widget-video" data-id="d19bac9" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/www.youtube.com\/watch?v=tfmmzopZJV8&quot;,&quot;video_type&quot;:&quot;youtube&quot;}" data-widget_type="video.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-wrapper elementor-open-inline">
+			<div class="elementor-video"></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-95d03b6 elementor-align-center elementor-widget elementor-widget-button" data-id="95d03b6" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">CLIQUE AQUI PARA FAZER PARTE DO <br> CLUBE AMORARIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-3943179 elementor-widget elementor-widget-heading" data-id="3943179" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Compra segura </b>com garantia incondicional de <b>7 dias.</b></h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-21bfe485 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="21bfe485" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;shape_divider_top&quot;:&quot;curve&quot;,&quot;shape_divider_bottom&quot;:&quot;curve&quot;,&quot;_ha_eqh_enable&quot;:false}">
+					<div class="elementor-shape elementor-shape-top" aria-hidden="true" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+    <path class="elementor-shape-fill" d="M1000,4.3V0H0v4.3C0.9,23.1,126.7,99.2,500,100S1000,22.7,1000,4.3z"/>
+</svg>		</div>
+				<div class="elementor-shape elementor-shape-bottom" aria-hidden="true" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+    <path class="elementor-shape-fill" d="M1000,4.3V0H0v4.3C0.9,23.1,126.7,99.2,500,100S1000,22.7,1000,4.3z"/>
+</svg>		</div>
+					<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1e95a6f" data-id="1e95a6f" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-7ec3117 elementor-widget elementor-widget-heading" data-id="7ec3117" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">O que é o Clube</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-7a94da7 elementor-widget elementor-widget-heading" data-id="7a94da7" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Muito além do crochê, o Clube Amoraria é…</b>
+<br><br>
+No Clube Amoraria <b>nós aliamos as técnicas aos efeitos terapêuticos das mandalas em crochê.</b>
+<br><br>
+Agora, você deve estar se perguntando como o Clube funciona!
+<br><br>
+Acredite, o <b>Clube Amoraria é diferente de tudo que você já viu!</b></h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-7e4caee elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7e4caee" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-371c014" data-id="371c014" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-e840074 elementor-widget elementor-widget-heading" data-id="e840074" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Ao fazer parte do Clube Amoraria você terá acesso A:</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+		<div class="elementor-element elementor-element-87c433a e-flex e-con-boxed e-con e-parent" data-id="87c433a" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-4db347f6 e-con-full e-flex e-con e-child" data-id="4db347f6" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-b005f50 elementor-widget elementor-widget-image-box" data-id="b005f50" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h4 class="elementor-image-box-title">RECEITAS AUTORAIS DE MANDALAS EM CROCHÊ</h4><p class="elementor-image-box-description">O Clube Amoraria é composto por <b>todos os projetos autorais do Amoraria Atelier</b>, isso mesmo TODOS, <b>inclusive os exclusivos que não são vendidos separadamente</b> e os que ainda serão lançados. 
+<br><br>
+
+O Clube Amoraria hoje já conta com <b>mais de 15 projetos prontos</b> e disponíveis pra você, incluindo as Mandalas Primavera e Verão que são meus dois últimos lançamentos. E além deles, ainda neste ano irão entrar também mais 2 projetos: a Mandala Outono e a Mandala Inverno, para completar a Coleção das Estações.
+</p></div></div>				</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-713654c e-con-full e-flex e-con e-child" data-id="713654c" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-7b59488 elementor-widget elementor-widget-image-box" data-id="7b59488" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h4 class="elementor-image-box-title">CONTEÚDOS EXCLUSIVOS PARA SEU DESENVOLVIMENTO PESSOAL</h4><p class="elementor-image-box-description">Eu sinto na pele que os trabalhos com as mandalas em crochê vão além da técnica em si e é por isso que a cada projeto eu trago junto com o crochê um conteúdo exclusivo relacionado à intenção do projeto. Assim, <b>com a ajuda de uma convidada super especial você vai refletir</b>, elaborar questões, se conectar consigo mesma acessando seu mundo interno e seguir na construção do seu autoconhecimento.
+<br><br>
+Lá no Clube a gente usa uma coisa que a gente ama muito que é o <b>crochê como ferramenta para nossa evolução pessoal.</b></p></div></div>				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-4b7b842 e-flex e-con-boxed e-con e-parent" data-id="4b7b842" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-8648e99 e-con-full e-flex e-con e-child" data-id="8648e99" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-d827d09 elementor-widget elementor-widget-image-box" data-id="d827d09" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h4 class="elementor-image-box-title">AULAS PARA INICIANTES</h4><p class="elementor-image-box-description">Se você é iniciante, fique tranquila!
+
+Porque lá você vai ter <b>aulas especiais para aprender ou tirar dúvidas sobre a execução dos principais pontos básicos. </b>
+
+Outra coisa importante é que faço todas as aulas com bastante calma, bem devagarinho pra você ver nos mínimos detalhes.
+</p></div></div>				</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-17da81b e-con-full e-flex e-con e-child" data-id="17da81b" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-4b6051c elementor-widget elementor-widget-image-box" data-id="4b6051c" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h4 class="elementor-image-box-title">AULAS PARA DESTRAS E CANHOTAS</h4><p class="elementor-image-box-description">Todas as aulas estão adaptadas para as canhotas, inclusive os gráficos!
+O Clube Amoraria hoje <b>é o único a fornecer videoaulas gravadas especialmente para canhotas.</b></p></div></div>				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-13d9660 e-flex e-con-boxed e-con e-parent" data-id="13d9660" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-c0ff9c9 e-con-full e-flex e-con e-child" data-id="c0ff9c9" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-96d9d23 elementor-align-center elementor-widget elementor-widget-button" data-id="96d9d23" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">QUERO FAZER PARTE DO <br> CLUBE AMORARIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-8430044 elementor-widget elementor-widget-heading" data-id="8430044" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Compra segura </b>com garantia incondicional de <b>7 dias.</b></h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-35a044a elementor-widget elementor-widget-image" data-id="35a044a" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img decoding="async" width="503" height="56" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20503%2056'%3E%3C/svg%3E" class="attachment-full size-full wp-image-76" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" data-lazy-sizes="(max-width: 503px) 100vw, 503px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" /><noscript><img decoding="async" width="503" height="56" src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" class="attachment-full size-full wp-image-76" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" sizes="(max-width: 503px) 100vw, 503px" /></noscript>															</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-9149640 elementor-section-content-middle elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="9149640" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-a3385b6" data-id="a3385b6" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-4622d4e elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="4622d4e" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-e35d280" data-id="e35d280" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-b7b7342 elementor-widget elementor-widget-heading" data-id="b7b7342" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">O Clube Amoraria é</h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-ba5943d" data-id="ba5943d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-35f91f1 elementor-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="35f91f1" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-map-pointer-check"></i>						</span>
+										<span class="elementor-icon-list-text">Para você que quer fazer parte de um ambiente no qual você não estará mais sozinha;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-map-pointer-check"></i>						</span>
+										<span class="elementor-icon-list-text">Para você que faz crochê e quer aprender mais uma forma de tecer;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-map-pointer-check"></i>						</span>
+										<span class="elementor-icon-list-text">Para você que pretende se conectar consigo, melhorando sua energia;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-map-pointer-check"></i>						</span>
+										<span class="elementor-icon-list-text">Para você que quer ter um novo hobby;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-map-pointer-check"></i>						</span>
+										<span class="elementor-icon-list-text">Para você que deseja fazer mandalas para vender e ter uma nova fonte de renda;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-map-pointer-check"></i>						</span>
+										<span class="elementor-icon-list-text">Para você que tem alguém especial para presentear e quer algo inesquecível, feito à mão.</span>
+									</li>
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-d3590d3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="d3590d3" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-98c3d71" data-id="98c3d71" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-1e002aa elementor-widget elementor-widget-heading" data-id="1e002aa" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Conheça os projetos que já estão disponíveis no Clube:
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+		<div class="elementor-element elementor-element-db725b8 e-con-full e-flex e-con e-parent" data-id="db725b8" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;shape_divider_top&quot;:&quot;curve&quot;,&quot;shape_divider_bottom&quot;:&quot;curve&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-shape elementor-shape-top" aria-hidden="true" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+    <path class="elementor-shape-fill" d="M1000,4.3V0H0v4.3C0.9,23.1,126.7,99.2,500,100S1000,22.7,1000,4.3z"/>
+</svg>		</div>
+				<div class="elementor-shape elementor-shape-bottom" aria-hidden="true" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+    <path class="elementor-shape-fill" d="M1000,4.3V0H0v4.3C0.9,23.1,126.7,99.2,500,100S1000,22.7,1000,4.3z"/>
+</svg>		</div>
+		<div class="elementor-element elementor-element-3222958 e-con-full e-flex e-con e-child" data-id="3222958" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-c202773 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="c202773" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/AMOR-PROPRIO-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> AMOR PRÓPRIO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-3721284 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="3721284" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/conexao-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> CONEXÃO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-f936e8d elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="f936e8d" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/Contemplacao-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> CONTEMPLAÇÃO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-1b2fce3 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="1b2fce3" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/chakras-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA DOS CHAKRAS</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-3d2f52a elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="3d2f52a" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/entrega-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> ENTREGA</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-37d8901 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="37d8901" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/expansao-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> EXPANSÃO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-cffbe78 e-con-full e-flex e-con e-child" data-id="cffbe78" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-a154f69 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="a154f69" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/intuicao-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> INTUIÇÃO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-ce02214 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="ce02214" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/primavera-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> PRIMAVERA</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-eef42b0 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="eef42b0" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/renascimento-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> RENASCIMENTO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-f232d3a elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="f232d3a" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/vitalidade-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> VITALIDADE</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-0c2f902 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="0c2f902" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/verao-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> VERÃO</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-3edf038 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="3edf038" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/PAINEL-DA-PROSPERIDADE-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>PAINEL DA<br> PROSPERIDADE</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-5c07c29 e-con-full e-flex e-con e-child" data-id="5c07c29" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-26e397c elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="26e397c" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/ACOLHER-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> ACOLHER</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-4a0a3c6 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="4a0a3c6" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/cura-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> CURA</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-1680a2f elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="1680a2f" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/estacoes-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> DAS ESTAÇÕES</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-196efa8 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="196efa8" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/Dobra-8-V2.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALA<br> MENSAGEIRA DOS VENTOS</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-1ef3162 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="1ef3162" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/Natalina-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALINHA<br> NATALINA</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-3bf9967 elementor-cta--valign-middle elementor-widget__width-inherit elementor-widget-tablet__width-initial elementor-widget-mobile__width-inherit elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="3bf9967" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-cta">
+					<div class="elementor-cta__bg-wrapper">
+				<div data-bg="https://amoraria.com.br/wp-content/uploads/2024/03/Delicadeza-V1.jpg" class="elementor-cta__bg elementor-bg rocket-lazyload" style=""></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<span class="elementor-cta__title elementor-cta__content-item elementor-content-item"><b>MANDALINHA<br> DELIZADEZA</b></span>
+				
+							</div>
+						</div>
+						</div>
+				</div>
+				</div>
+				</div>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-4b1c590 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4b1c590" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-65cc5e7" data-id="65cc5e7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-c68173d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="c68173d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-1ac1cb7" data-id="1ac1cb7" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-background-overlay"></div>
+						<div class="elementor-element elementor-element-cd3c9a2 elementor-align-center elementor-widget elementor-widget-button" data-id="cd3c9a2" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">QUERO FAZER PARTE DO <br> CLUBE AMORARIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-4a03753 elementor-widget elementor-widget-heading" data-id="4a03753" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Compra segura </b>com garantia incondicional de <b>7 dias.</b></h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-94d0a42 elementor-widget elementor-widget-image" data-id="94d0a42" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img decoding="async" width="503" height="56" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20503%2056'%3E%3C/svg%3E" class="attachment-full size-full wp-image-76" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" data-lazy-sizes="(max-width: 503px) 100vw, 503px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" /><noscript><img decoding="async" width="503" height="56" src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" class="attachment-full size-full wp-image-76" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" sizes="(max-width: 503px) 100vw, 503px" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+		<div class="elementor-element elementor-element-3a2dc9a5 e-flex e-con-boxed e-con e-parent" data-id="3a2dc9a5" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-514ce586 e-con-full e-flex e-con e-child" data-id="514ce586" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+				<div class="elementor-element elementor-element-a69c9fb elementor-widget elementor-widget-heading" data-id="a69c9fb" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Assista uma das aulas do Clube Amoraria</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-cd66438 elementor-widget elementor-widget-video" data-id="cd66438" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/youtu.be\/KnhVDLPoMNc&quot;,&quot;video_type&quot;:&quot;youtube&quot;}" data-widget_type="video.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-wrapper elementor-open-inline">
+			<div class="elementor-video"></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-44297eb elementor-align-center elementor-widget elementor-widget-button" data-id="44297eb" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">QUERO FAZER PARTE DO <br> CLUBE AMORARIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-0225c01 elementor-widget elementor-widget-heading" data-id="0225c01" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Compra segura </b>com garantia incondicional de <b>7 dias.</b></h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-aed132e elementor-widget elementor-widget-image" data-id="aed132e" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img decoding="async" width="503" height="56" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20503%2056'%3E%3C/svg%3E" class="attachment-full size-full wp-image-76" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" data-lazy-sizes="(max-width: 503px) 100vw, 503px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" /><noscript><img decoding="async" width="503" height="56" src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" class="attachment-full size-full wp-image-76" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" sizes="(max-width: 503px) 100vw, 503px" /></noscript>															</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-60e52a9 elementor-section-content-middle elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="60e52a9" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-40d278b" data-id="40d278b" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-522afa1 elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="522afa1" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-787498d" data-id="787498d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-20439c1 elementor-widget elementor-widget-heading" data-id="20439c1" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Um portal feito especialmente para você</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-d9b4570 elementor-widget elementor-widget-heading" data-id="d9b4570" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Nós preparamos <b>um novo portal do Clube</b>, uma nova área de membros muito mais bonita e intuitiva, para que <b>você possa navegar por todos os projetos e aulas</b> de uma forma <b>muito mais simples&nbsp;e&nbsp;fácil.</b></h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2ae71fa" data-id="2ae71fa" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+		<div class="elementor-element elementor-element-49e13c6 e-flex e-con-boxed e-con e-parent" data-id="49e13c6" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+					<div class="e-con-inner">
+				<div class="elementor-element elementor-element-4e7bea2 elementor-widget elementor-widget-heading" data-id="4e7bea2" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h1 class="elementor-heading-title elementor-size-default">mais nOVIDADE NO CLUBE Amoraria: <br>Roda de Crocheterapia!</h1>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2e6de0a elementor-widget elementor-widget-heading" data-id="2e6de0a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Você terá acesso ao mais novo lançamento do Amoraria, Roda de Crocheterapia:<br><b>A primeira Roda já acontece no dia 31/03!</b>
+</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2aef294 elementor-align-center elementor-widget elementor-widget-button" data-id="2aef294" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">ENTRAR NO CLUBE E PARTICIPAR DA RODA DE CROCHETERAPIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+				</div>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-78528d95 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="78528d95" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-63cd387d" data-id="63cd387d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-39e3d3d1 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="39e3d3d1" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-7b03365a" data-id="7b03365a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-431def93 elementor-widget elementor-widget-heading" data-id="431def93" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">AVALIAÇÕES DE ALUNAS NA PLATAFORMA HOTMART</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-58a1d526 elementor-widget elementor-widget-heading" data-id="58a1d526" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Deixa eu te contar algo incrível! 
+</b><br><br>Todos os meus cursos possuem avaliação máxima na plataforma Hotmart, veja abaixo o relato de algumas das minhas alunas.
+</h2>				</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-42a5b8f8 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="42a5b8f8" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-1ac2dc80" data-id="1ac2dc80" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-22e2106 elementor-widget elementor-widget-heading" data-id="22e2106" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">MARTA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2f2c76d7 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="2f2c76d7" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-2111c9f3 elementor-widget elementor-widget-heading" data-id="2111c9f3" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"A maneira como as receitas são feitas, como os pontos são aplicados-arrematados, como as cores harmonizam são EXCELENTES. Tecer junta com Priscilla é como resgatar aquelas antigas vivências em que as mulheres se juntavam pra falar, trocar receitas, se aconselhar ou simplesmente conversar. É uma viagem ALTAMENTE POÉTICA e primordialmente NECESSÁRIA. Sou grata pelos bons momentos que tenho vivido. Verdade, a arte terapêutica de TECER é pra vida TODA! Gratidão"<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-3253e793" data-id="3253e793" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-562cde0 elementor-widget elementor-widget-heading" data-id="562cde0" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">ALEXANDRA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-5e588d88 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="5e588d88" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-7e616f94 elementor-widget elementor-widget-heading" data-id="7e616f94" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"O acolhimento e formato são ma ra vi lho sos Obrigada, Pri e Re e todes que partciparam desse projeto"
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-428176a6 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="428176a6" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-f23e7ac" data-id="f23e7ac" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-43810a4a elementor-widget elementor-widget-heading" data-id="43810a4a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">MARIA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-29908f6 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="29908f6" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-4891e957 elementor-widget elementor-widget-heading" data-id="4891e957" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Apresentação maravilhosa, com riqueza de detalhes e muito didático! Amei!"<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-f367fa5" data-id="f367fa5" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-2484cb16 elementor-widget elementor-widget-heading" data-id="2484cb16" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">DILNA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-5503ec7b elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="5503ec7b" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-46fd2fcc elementor-widget elementor-widget-heading" data-id="46fd2fcc" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Aprender é um processo evolutivo que faz da experiência abertura de novos caminhos"<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-17473382 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="17473382" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6941ddd8" data-id="6941ddd8" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-18a38d48 elementor-widget elementor-widget-heading" data-id="18a38d48" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">CHRISTIANE</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2bebe828 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="2bebe828" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-2cef9c85 elementor-widget elementor-widget-heading" data-id="2cef9c85" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Está sendo maravilhosa."<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-c78736b" data-id="c78736b" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-645a8a9e elementor-widget elementor-widget-heading" data-id="645a8a9e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">MAITTÊ</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-761fb012 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="761fb012" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-15b582de elementor-widget elementor-widget-heading" data-id="15b582de" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Curso maravilhoso!!"<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-1b0c087b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1b0c087b" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-24adffff" data-id="24adffff" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-530462d elementor-widget elementor-widget-heading" data-id="530462d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">ELIANA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-295ce403 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="295ce403" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-71cca1b6 elementor-widget elementor-widget-heading" data-id="71cca1b6" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Curso muito bem elaborado e professora nota 1000. Nos transmite confianca, paz , serenidade e alegria no que faz."<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-18680f27" data-id="18680f27" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-599e3893 elementor-widget elementor-widget-heading" data-id="599e3893" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">ANGELA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6d43a65b elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="6d43a65b" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-2732228 elementor-widget elementor-widget-heading" data-id="2732228" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Estou amando as mandalas e o jeitinho carinhoso da Priscila ensinar."<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-7d8fc50a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7d8fc50a" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-57a0d040" data-id="57a0d040" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-2165f7ee elementor-widget elementor-widget-heading" data-id="2165f7ee" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">ANA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-49b5d3a5 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="49b5d3a5" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-462ff009 elementor-widget elementor-widget-heading" data-id="462ff009" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Gostei muito porque aprendi uma nova habilidade. Gostaria de ter sucesso."<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-645ab948" data-id="645ab948" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d94203e elementor-widget elementor-widget-heading" data-id="d94203e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">CLEUSA</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6ed2ee01 elementor-star-rating--align-center elementor--star-style-star_fontawesome elementor-widget elementor-widget-star-rating" data-id="6ed2ee01" data-element_type="widget" data-widget_type="star-rating.default">
+				<div class="elementor-widget-container">
+					
+		<div class="elementor-star-rating__wrapper">
+						<div class="elementor-star-rating" title="5/5" itemtype="http://schema.org/Rating" itemscope="" itemprop="reviewRating"><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i><i class="elementor-star-full">&#xE934;</i> <span itemprop="ratingValue" class="elementor-screen-only">5/5</span></div>		</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-7fda547d elementor-widget elementor-widget-heading" data-id="7fda547d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">"Estou adorando o curso, a Priscila explica muito bem e com muita calma....."<br>
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-d7682e4 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="d7682e4" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-c6f6780" data-id="c6f6780" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-99832b1 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="99832b1" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-10f2589" data-id="10f2589" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-background-overlay"></div>
+						<div class="elementor-element elementor-element-37d6217 elementor-align-center elementor-widget elementor-widget-button" data-id="37d6217" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">CLIQUE AQUI PARA FAZER PARTE DO <br> CLUBE AMORARIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-93cc436 elementor-widget elementor-widget-heading" data-id="93cc436" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Compra segura </b>com garantia incondicional de <b>7 dias.</b></h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-8fd5085 elementor-widget elementor-widget-image" data-id="8fd5085" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img decoding="async" width="503" height="56" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20503%2056'%3E%3C/svg%3E" class="attachment-full size-full wp-image-76" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" data-lazy-sizes="(max-width: 503px) 100vw, 503px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" /><noscript><img decoding="async" width="503" height="56" src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" class="attachment-full size-full wp-image-76" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" sizes="(max-width: 503px) 100vw, 503px" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-303c02f2 elementor-section-content-middle elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="303c02f2" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5285ace7" data-id="5285ace7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-1887d538 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1887d538" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-348e5869" data-id="348e5869" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-56814016 elementor-widget elementor-widget-heading" data-id="56814016" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Ao participar do Clube você terá acesso a:
+</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6579bcc5 elementor-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="6579bcc5" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-video-gallery"></i>						</span>
+										<span class="elementor-icon-list-text"><b>+ de 16 projetos autorais do Amoraria</b> (Mandala Amor Próprio, Mandala Conexão, Mandala Contemplação, Mandala Hanger dos Chakras, Mandala Entrega, Mandala Expansão, Mandala Intuição, Mandala Primavera, Mandala Renascimento, Mandala Vitalidade, Mandala Verão, Painel da Prosperidade, Mandala Acolher, Mandala Cura, Mandala das Estações, Mandala Mensageira dos Ventos, Mandala Outono e Mandala&nbsp;Inverno);</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-video-gallery"></i>						</span>
+										<span class="elementor-icon-list-text">Acesso a todo projeto novo de Mandala que eu lançar no Amoraria, no período em que fizer parte do Clube;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-video-gallery"></i>						</span>
+										<span class="elementor-icon-list-text">Curso de introdução ao crochê;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-support-call"></i>						</span>
+										<span class="elementor-icon-list-text">Suporte para tirar todas as suas dúvidas;</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="hm hm-video-gallery"></i>						</span>
+										<span class="elementor-icon-list-text">Um portal lindo para acessar todo esse conteúdo.</span>
+									</li>
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6de4992d elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6de4992d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-407cc02" data-id="407cc02" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-730ff8a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="730ff8a" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-75eece4d" data-id="75eece4d" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-background-overlay"></div>
+						<div class="elementor-element elementor-element-2c78d145 elementor-widget elementor-widget-heading" data-id="2c78d145" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Hoje, se você fosse adquirir apenas os <b>15 projetos do Amoraria</b>, você pagaria:
+<b>R$2.955,00</b>
+<br><br>
+<u><b>Mas hoje o preço do Clube não será esse!
+</b></u><br><br>
+Entrando hoje no clube você receberá <b>1 mil reais de desconto.</b></h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-4aa6ffeb elementor-widget elementor-widget-heading" data-id="4aa6ffeb" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">De <span style="text-decoration: line-through"><b>R$ 2.997,00</b></span> por apenas:</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-4043edf9 elementor-widget elementor-widget-heading" data-id="4043edf9" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-heading-title elementor-size-default"><span style="font-size: 80px;font-family: montserrat"><b style="font-weight: 700">R$297,00</b></span>
+
+<span style="font-size: 20px;font-family: montserrat"></span></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-a4e38bd elementor-align-center elementor-widget elementor-widget-button" data-id="a4e38bd" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-lg elementor-animation-grow" href="https://go.invictuspay.app.br/7feljozopb" target="_blank">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">CLIQUE AQUI PARA FAZER PARTE DO <br> CLUBE AMORARIA</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				<div class="elementor-element elementor-element-01aee2b elementor-widget elementor-widget-heading" data-id="01aee2b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default"><b>Compra segura </b>com garantia incondicional de <b>7 dias.</b></h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-efff75b elementor-widget elementor-widget-image" data-id="efff75b" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img decoding="async" width="503" height="56" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20503%2056'%3E%3C/svg%3E" class="attachment-full size-full wp-image-76" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" data-lazy-sizes="(max-width: 503px) 100vw, 503px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" /><noscript><img decoding="async" width="503" height="56" src="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png" class="attachment-full size-full wp-image-76" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2.png 503w, https://amoraria.com.br/wp-content/uploads/2022/05/pagamento-2-300x33.png 300w" sizes="(max-width: 503px) 100vw, 503px" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-68e1deb elementor-section-content-middle elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="68e1deb" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-48ea3ff" data-id="48ea3ff" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-a240890 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="a240890" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-60bc551" data-id="60bc551" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-913644a elementor-widget elementor-widget-image" data-id="913644a" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img fetchpriority="high" decoding="async" width="800" height="624" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20624'%3E%3C/svg%3E" class="attachment-large size-large wp-image-58" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto.png 800w, https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto-300x234.png 300w, https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto-768x599.png 768w" data-lazy-sizes="(max-width: 800px) 100vw, 800px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto.png" /><noscript><img fetchpriority="high" decoding="async" width="800" height="624" src="https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto.png" class="attachment-large size-large wp-image-58" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto.png 800w, https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto-300x234.png 300w, https://amoraria.com.br/wp-content/uploads/2022/05/Brasao-da-Garantia-7-dias-Preto-768x599.png 768w" sizes="(max-width: 800px) 100vw, 800px" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-eebe9a3" data-id="eebe9a3" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-f5e4211 elementor-widget elementor-widget-heading" data-id="f5e4211" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Ahhh e você não tem risco algum!
+</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-8a312f2 elementor-widget elementor-widget-heading" data-id="8a312f2" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Funciona assim: <b>Você entra pro Clube Amoraria agora, acessa a plataforma e experimenta por 7 Dias.</b>
+<br><br>
+Se dentro deste período, você achar que ele não é pra você, não tem problema nenhum, você pede seu investimento de volta.
+<br><br>
+<b>É simples assim.
+</b><br><br>
+Na prática isso significa que: Ou você se dá esse presente e fica feliz crochetando suas mandalas comigo ou você fica feliz também com o seu dinheiro de volta
+<br><br>
+<b>É ganhar ou ganhar!
+</b></h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-50fd3944 elementor-section-content-middle elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="50fd3944" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2307e534" data-id="2307e534" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-538b8023 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="538b8023" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-284c78c3" data-id="284c78c3" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-6287e58d elementor-widget elementor-widget-heading" data-id="6287e58d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Conheça a alma criativa e a artesã do Amoraria Atelier!
+</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-23f6bd06 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="23f6bd06" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-40805f20" data-id="40805f20" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-49278c3 elementor-widget elementor-widget-image" data-id="49278c3" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img loading="lazy" decoding="async" width="800" height="800" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20800'%3E%3C/svg%3E" class="attachment-large size-large wp-image-364" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/07/1-1024x1024.png 1024w, https://amoraria.com.br/wp-content/uploads/2022/07/1-300x300.png 300w, https://amoraria.com.br/wp-content/uploads/2022/07/1-150x150.png 150w, https://amoraria.com.br/wp-content/uploads/2022/07/1-768x768.png 768w, https://amoraria.com.br/wp-content/uploads/2022/07/1.png 1080w" data-lazy-sizes="(max-width: 800px) 100vw, 800px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/07/1-1024x1024.png" /><noscript><img loading="lazy" decoding="async" width="800" height="800" src="https://amoraria.com.br/wp-content/uploads/2022/07/1-1024x1024.png" class="attachment-large size-large wp-image-364" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/07/1-1024x1024.png 1024w, https://amoraria.com.br/wp-content/uploads/2022/07/1-300x300.png 300w, https://amoraria.com.br/wp-content/uploads/2022/07/1-150x150.png 150w, https://amoraria.com.br/wp-content/uploads/2022/07/1-768x768.png 768w, https://amoraria.com.br/wp-content/uploads/2022/07/1.png 1080w" sizes="(max-width: 800px) 100vw, 800px" /></noscript>															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6f97d4dd" data-id="6f97d4dd" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-376b7e3c elementor-widget elementor-widget-heading" data-id="376b7e3c" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Olá! Eu sou Priscila Tambelli
+</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-64b9643b elementor-widget elementor-widget-heading" data-id="64b9643b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Sinto que o Amoraria já existia dentro de mim, porque eu sempre estive ligada aos trabalhos manuais. Mas foi ao me tornar mãe que ele se concretizou. 
+<br><br>
+Eu ganhei toda força que precisava para assumir integralmente o Amoraria e transformar o, até então, hobby em profissão. 
+<br><br>
+Depois de um tempo negando os pedidos, passei a aceitar encomendas. Passado mais um tempo, veio a vontade enorme de ensinar! 
+<br><br>
+E é esse o atual objetivo do Amoraria! Ser um espaço de criação, inspiração, aprendizado e muita troca.
+<br><br>
+Então vamos junt@s nessa caminhada linda que é o trabalho manual! Nessa roda e ciclo de aprendizado e ensinamento que nunca para de girar e se movimentar. Hora aprendendo, hora ensinando… transcrito lindamente pela Cora Coralina:
+<br><br>
+“Feliz aquele que transfere o que sabe e aprende o que ensina” 
+<br><br>
+Beijos carinhosos.
+Pri Tambelli</h2>				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-ca148af elementor-section-content-middle elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ca148af" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-no">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8bcf4b2" data-id="8bcf4b2" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-36b8b860 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="36b8b860" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-34b97572" data-id="34b97572" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-366070ad elementor-widget elementor-widget-heading" data-id="366070ad" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">ESTÁ COM ALGUMA DÚVIDA?</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f40db77 elementor-widget elementor-widget-toggle" data-id="f40db77" data-element_type="widget" data-widget_type="toggle.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-toggle">
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2551" class="elementor-tab-title" data-tab="1" role="button" aria-controls="elementor-tab-content-2551" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">Por quanto tempo tenho acesso?</a>
+					</div>
+
+					<div id="elementor-tab-content-2551" class="elementor-tab-content elementor-clearfix" data-tab="1" role="region" aria-labelledby="elementor-tab-title-2551"><p><b>Você terá acesso ao curso durante 1 (UM) ano</b> a partir da data de compra.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2552" class="elementor-tab-title" data-tab="2" role="button" aria-controls="elementor-tab-content-2552" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">Quais são as formas de pagamento?</a>
+					</div>
+
+					<div id="elementor-tab-content-2552" class="elementor-tab-content elementor-clearfix" data-tab="2" role="region" aria-labelledby="elementor-tab-title-2552"><p>Cartão de crédito, PIX e boleto bancário (somente na modalidade à vista), entre outras.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2553" class="elementor-tab-title" data-tab="3" role="button" aria-controls="elementor-tab-content-2553" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">As aulas são todas on-line?</a>
+					</div>
+
+					<div id="elementor-tab-content-2553" class="elementor-tab-content elementor-clearfix" data-tab="3" role="region" aria-labelledby="elementor-tab-title-2553"><p><span style="font-weight: 400;">Sim. </span><b>As aulas são todas on-line</b><span style="font-weight: 400;">, as mesmas ficarão disponíveis na área de membros enquanto durar o período de acesso.</span></p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2554" class="elementor-tab-title" data-tab="4" role="button" aria-controls="elementor-tab-content-2554" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">Como recebo os dados de acesso?</a>
+					</div>
+
+					<div id="elementor-tab-content-2554" class="elementor-tab-content elementor-clearfix" data-tab="4" role="region" aria-labelledby="elementor-tab-title-2554"><p><span style="font-weight: 400;">Após a aprovação do pagamento, você receberá os dados de acesso automaticamente no e-mail cadastrado no ato da compra. Por isso, </span><b>é importante que você cadastre um e-mail válido</b><span style="font-weight: 400;">. Depois da sua matrícula, procure por um e-mail (pode ser que caia na sua caixa de spam ou promoções) enviado pela Hotmart, </span><b>seu acesso estará nesse e-mail.</b></p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2555" class="elementor-tab-title" data-tab="5" role="button" aria-controls="elementor-tab-content-2555" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">CONSIGO ACOMPANHAR PELO CELULAR?</a>
+					</div>
+
+					<div id="elementor-tab-content-2555" class="elementor-tab-content elementor-clearfix" data-tab="5" role="region" aria-labelledby="elementor-tab-title-2555"><p><span style="font-weight: 400;">Sim, a área de membros pode ser acessada por qualquer dispositivo que possui acesso à internet. Isso inclui tablet, celular, desktop, notebook, Smart TV e demais dispositivos.</span></p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2556" class="elementor-tab-title" data-tab="6" role="button" aria-controls="elementor-tab-content-2556" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">Posso baixar o material?</a>
+					</div>
+
+					<div id="elementor-tab-content-2556" class="elementor-tab-content elementor-clearfix" data-tab="6" role="region" aria-labelledby="elementor-tab-title-2556"><p><b>Você poderá fazer o download de todos os materiais</b><span style="font-weight: 400;"> e ter esses arquivos permanentemente. Os vídeos não poderão ser baixados, mas ficarão disponíveis no tempo de acesso ao clube.</span></p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2557" class="elementor-tab-title" data-tab="7" role="button" aria-controls="elementor-tab-content-2557" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">FUNCIONA PRA QUEM COMEÇOU A CROCHETAR AGORA?</a>
+					</div>
+
+					<div id="elementor-tab-content-2557" class="elementor-tab-content elementor-clearfix" data-tab="7" role="region" aria-labelledby="elementor-tab-title-2557"><p>Sim! Dentro do clube, <b>você vai encontrar aulas de introdução ao crochê para iniciantes,</b> poderá treinar quanto achar necessário e iniciar no mundo das mandalas.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2558" class="elementor-tab-title" data-tab="8" role="button" aria-controls="elementor-tab-content-2558" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">COMO PODEREI ACESSAR O CURSO?</a>
+					</div>
+
+					<div id="elementor-tab-content-2558" class="elementor-tab-content elementor-clearfix" data-tab="8" role="region" aria-labelledby="elementor-tab-title-2558"><p>Através da plataforma Hotmart, ou pelo aplicativo Sparkle que é da Hotmart e nele <b>você poderá acessar todas as aulas direto pelo seu celular.</b></p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-2559" class="elementor-tab-title" data-tab="9" role="button" aria-controls="elementor-tab-content-2559" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">SE EU TIVER ALGUMA DÚVIDA, POSSO ENTRAR EM CONTATO COM A PROFESSORA?</a>
+					</div>
+
+					<div id="elementor-tab-content-2559" class="elementor-tab-content elementor-clearfix" data-tab="9" role="region" aria-labelledby="elementor-tab-title-2559"><p>Sim, <b>você poderá deixar uma pergunta dentro da área de membro</b> no curso ou poderá enviar um e-mail direto a mim, Priscila, no e-mail <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="30535f5e4451445f70515d5f42514259515144555c5955421e535f5d1e5242">[email&#160;protected]</a>.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-25510" class="elementor-tab-title" data-tab="10" role="button" aria-controls="elementor-tab-content-25510" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">O PAGAMENTO É SEGURO?</a>
+					</div>
+
+					<div id="elementor-tab-content-25510" class="elementor-tab-content elementor-clearfix" data-tab="10" role="region" aria-labelledby="elementor-tab-title-25510"><p>Sim, <b>o pagamento é 100% seguro. </b>O curso é vendido pela maior plataforma de cursos online chamada Hotmart, que garante a segurança dos pagamentos. E aceita pagamentos internacionais de todas as principais moedas.</p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-25511" class="elementor-tab-title" data-tab="11" role="button" aria-controls="elementor-tab-content-25511" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">Tem garantia?</a>
+					</div>
+
+					<div id="elementor-tab-content-25511" class="elementor-tab-content elementor-clearfix" data-tab="11" role="region" aria-labelledby="elementor-tab-title-25511"><p><span style="font-weight: 400;">Sim! Após o pagamento ser aprovado, </span><b>você poderá experimentar por 7 dias.<br /></b><span style="font-weight: 400;">Funciona assim: Você entrar para o clube agora, acessa a plataforma e experimenta por 7 dias.<br /></span><span style="font-weight: 400;">Se dentro deste período, você achar que ele não é pra você nesse momento, não tem problema nenhum, </span><b>você pede seu investimento de volta e devolvemos 100% do valor.</b></p></div>
+				</div>
+							<div class="elementor-toggle-item">
+					<div id="elementor-tab-title-25512" class="elementor-tab-title" data-tab="12" role="button" aria-controls="elementor-tab-content-25512" aria-expanded="false">
+												<span class="elementor-toggle-icon elementor-toggle-icon-left" aria-hidden="true">
+															<span class="elementor-toggle-icon-closed"><i class="fas fa-caret-down"></i></span>
+								<span class="elementor-toggle-icon-opened"><i class="elementor-toggle-icon-opened fas fa-angle-up"></i></span>
+													</span>
+												<a class="elementor-toggle-title" tabindex="0">Como acontece a liberação dos materiais bônus e pdf 's?</a>
+					</div>
+
+					<div id="elementor-tab-content-25512" class="elementor-tab-content elementor-clearfix" data-tab="12" role="region" aria-labelledby="elementor-tab-title-25512"><p><b>Todos os bônus e PDFs são liberados 7 dias após a compra. </b><span style="font-weight: 400;">O restante do conteúdo é disponibilizado imediatamente.&nbsp;</span></p></div>
+				</div>
+										<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Por quanto tempo tenho acesso?","acceptedAnswer":{"@type":"Answer","text":"<p><b>Voc\u00ea ter\u00e1 acesso ao curso durante 1 (UM) ano<\/b> a partir da data de compra.<\/p>"}},{"@type":"Question","name":"Quais s\u00e3o as formas de pagamento?","acceptedAnswer":{"@type":"Answer","text":"<p>Cart\u00e3o de cr\u00e9dito, PIX e boleto banc\u00e1rio (somente na modalidade \u00e0 vista), entre outras.<\/p>"}},{"@type":"Question","name":"As aulas s\u00e3o todas on-line?","acceptedAnswer":{"@type":"Answer","text":"<p><span style=\"font-weight: 400;\">Sim. <\/span><b>As aulas s\u00e3o todas on-line<\/b><span style=\"font-weight: 400;\">, as mesmas ficar\u00e3o dispon\u00edveis na \u00e1rea de membros enquanto durar o per\u00edodo de acesso.<\/span><\/p>"}},{"@type":"Question","name":"Como recebo os dados de acesso?","acceptedAnswer":{"@type":"Answer","text":"<p><span style=\"font-weight: 400;\">Ap\u00f3s a aprova\u00e7\u00e3o do pagamento, voc\u00ea receber\u00e1 os dados de acesso automaticamente no e-mail cadastrado no ato da compra. Por isso, <\/span><b>\u00e9 importante que voc\u00ea cadastre um e-mail v\u00e1lido<\/b><span style=\"font-weight: 400;\">. Depois da sua matr\u00edcula, procure por um e-mail (pode ser que caia na sua caixa de spam ou promo\u00e7\u00f5es) enviado pela Hotmart, <\/span><b>seu acesso estar\u00e1 nesse e-mail.<\/b><\/p>"}},{"@type":"Question","name":"CONSIGO ACOMPANHAR PELO CELULAR?","acceptedAnswer":{"@type":"Answer","text":"<p><span style=\"font-weight: 400;\">Sim, a \u00e1rea de membros pode ser acessada por qualquer dispositivo que possui acesso \u00e0 internet. Isso inclui tablet, celular, desktop, notebook, Smart TV e demais dispositivos.<\/span><\/p>"}},{"@type":"Question","name":"Posso baixar o material?","acceptedAnswer":{"@type":"Answer","text":"<p><b>Voc\u00ea poder\u00e1 fazer o download de todos os materiais<\/b><span style=\"font-weight: 400;\"> e ter esses arquivos permanentemente. Os v\u00eddeos n\u00e3o poder\u00e3o ser baixados, mas ficar\u00e3o dispon\u00edveis no tempo de acesso ao clube.<\/span><\/p>"}},{"@type":"Question","name":"FUNCIONA PRA QUEM COME\u00c7OU A CROCHETAR AGORA?","acceptedAnswer":{"@type":"Answer","text":"<p>Sim! Dentro do clube, <b>voc\u00ea vai encontrar aulas de introdu\u00e7\u00e3o ao croch\u00ea para iniciantes,<\/b> poder\u00e1 treinar quanto achar necess\u00e1rio e iniciar no mundo das mandalas.<\/p>"}},{"@type":"Question","name":"COMO PODEREI ACESSAR O CURSO?","acceptedAnswer":{"@type":"Answer","text":"<p>Atrav\u00e9s da plataforma Hotmart, ou pelo aplicativo Sparkle que \u00e9 da Hotmart e nele <b>voc\u00ea poder\u00e1 acessar todas as aulas direto pelo seu celular.<\/b><\/p>"}},{"@type":"Question","name":"SE EU TIVER ALGUMA D\u00daVIDA, POSSO ENTRAR EM CONTATO COM A PROFESSORA?","acceptedAnswer":{"@type":"Answer","text":"<p>Sim, <b>voc\u00ea poder\u00e1 deixar uma pergunta dentro da \u00e1rea de membro<\/b> no curso ou poder\u00e1 enviar um e-mail direto a mim, Priscila, no e-mail contato@amorariaatelier.com.br.<\/p>"}},{"@type":"Question","name":"O PAGAMENTO \u00c9 SEGURO?","acceptedAnswer":{"@type":"Answer","text":"<p>Sim, <b>o pagamento \u00e9 100% seguro. <\/b>O curso \u00e9 vendido pela maior plataforma de cursos online chamada Hotmart, que garante a seguran\u00e7a dos pagamentos. E aceita pagamentos internacionais de todas as principais moedas.<\/p>"}},{"@type":"Question","name":"Tem garantia?","acceptedAnswer":{"@type":"Answer","text":"<p><span style=\"font-weight: 400;\">Sim! Ap\u00f3s o pagamento ser aprovado, <\/span><b>voc\u00ea poder\u00e1 experimentar por 7 dias.<br \/><\/b><span style=\"font-weight: 400;\">Funciona assim: Voc\u00ea entrar para o clube agora, acessa a plataforma e experimenta por 7 dias.<br \/><\/span><span style=\"font-weight: 400;\">Se dentro deste per\u00edodo, voc\u00ea achar que ele n\u00e3o \u00e9 pra voc\u00ea nesse momento, n\u00e3o tem problema nenhum, <\/span><b>voc\u00ea pede seu investimento de volta e devolvemos 100% do valor.<\/b><\/p>"}},{"@type":"Question","name":"Como acontece a libera\u00e7\u00e3o dos materiais b\u00f4nus e pdf 's?","acceptedAnswer":{"@type":"Answer","text":"<p><b>Todos os b\u00f4nus e PDFs s\u00e3o liberados 7 dias ap\u00f3s a compra. <\/b><span style=\"font-weight: 400;\">O restante do conte\u00fado \u00e9 disponibilizado imediatamente.&nbsp;<\/span><\/p>"}}]}</script>
+					</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-3f7e099 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3f7e099" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-1fe9d703" data-id="1fe9d703" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-41be05bc elementor-widget elementor-widget-image" data-id="41be05bc" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+															<img loading="lazy" decoding="async" width="150" height="150" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-image-40" alt="" data-lazy-srcset="https://amoraria.com.br/wp-content/uploads/2022/05/Logo-1-150x150.png 150w, https://amoraria.com.br/wp-content/uploads/2022/05/Logo-1-300x297.png 300w" data-lazy-sizes="(max-width: 150px) 100vw, 150px" data-lazy-src="https://amoraria.com.br/wp-content/uploads/2022/05/Logo-1-150x150.png" /><noscript><img loading="lazy" decoding="async" width="150" height="150" src="https://amoraria.com.br/wp-content/uploads/2022/05/Logo-1-150x150.png" class="attachment-thumbnail size-thumbnail wp-image-40" alt="" srcset="https://amoraria.com.br/wp-content/uploads/2022/05/Logo-1-150x150.png 150w, https://amoraria.com.br/wp-content/uploads/2022/05/Logo-1-300x297.png 300w" sizes="(max-width: 150px) 100vw, 150px" /></noscript>															</div>
+				</div>
+				<div class="elementor-element elementor-element-23f8421b elementor-align-center elementor-icon-list--layout-inline elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="23f8421b" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items elementor-inline-items">
+							<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://www.facebook.com/amorariaatelier/">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-facebook-square"></i>						</span>
+										<span class="elementor-icon-list-text">Facebook</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://www.instagram.com/amorariaatelier/">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-instagram"></i>						</span>
+										<span class="elementor-icon-list-text">Instagram</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://www.pinterest.ie/amorariaatelier/_created/">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-pinterest"></i>						</span>
+										<span class="elementor-icon-list-text">Pinterest</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://www.youtube.com/channel/UCb-L0-b1doNPGh3wxVgBwiw">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fab fa-youtube"></i>						</span>
+										<span class="elementor-icon-list-text">YouTube</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-47d3169b elementor-align-center elementor-icon-list--layout-inline elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="47d3169b" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items elementor-inline-items">
+							<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://amorariaatelier.com.br/politica-de-privacidade/">
+
+											<span class="elementor-icon-list-text">POLÍTICA DE PRIVACIDADE</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+		<div class="elementor-element elementor-element-025b606 e-con-full e-flex e-con e-parent" data-id="025b606" data-element_type="container" data-settings="{&quot;position&quot;:&quot;fixed&quot;,&quot;_ha_eqh_enable&quot;:false}">
+				<div data-ha-element-link="{&quot;url&quot;:&quot;https:\/\/api.whatsapp.com\/send?phone=558596992689&#038;text=Ol%C3%A1,%20visitei%20a%20p%C3%A1gina%20do%20clube%20e%20fiquei%20com%20d%C3%BAvida.%20Pode%20me%20ajudar?&quot;,&quot;is_external&quot;:&quot;on&quot;,&quot;nofollow&quot;:&quot;&quot;}" style="cursor: pointer" class="elementor-element elementor-element-4159b21 elementor-widget__width-initial elementor-widget-tablet__width-initial elementor-widget-mobile__width-initial elementor-align-center elementor-widget elementor-widget-lottie" data-id="4159b21" data-element_type="widget" data-settings="{&quot;source&quot;:&quot;external_url&quot;,&quot;source_external_url&quot;:{&quot;url&quot;:&quot;https:\/\/assets7.lottiefiles.com\/private_files\/lf30_qnpfavmd.json&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;},&quot;loop&quot;:&quot;yes&quot;,&quot;play_speed&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:0.6,&quot;sizes&quot;:[]},&quot;link_to&quot;:&quot;none&quot;,&quot;trigger&quot;:&quot;arriving_to_viewport&quot;,&quot;viewport&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:{&quot;start&quot;:0,&quot;end&quot;:100}},&quot;start_point&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:&quot;0&quot;,&quot;sizes&quot;:[]},&quot;end_point&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:&quot;100&quot;,&quot;sizes&quot;:[]},&quot;renderer&quot;:&quot;svg&quot;}" data-widget_type="lottie.default">
+				<div class="elementor-widget-container">
+					<div class="e-lottie__container"><div class="e-lottie__animation"></div></div>				</div>
+				</div>
+				</div>
+				</div>
+		<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/hello-elementor\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+		<style>
+			:root {
+				-webkit-user-select: none;
+				-webkit-touch-callout: none;
+				-ms-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+		</style>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+			/*<![CDATA[*/
+			document.oncontextmenu = function(event) {
+				if (event.target.tagName != 'INPUT' && event.target.tagName != 'TEXTAREA') {
+					event.preventDefault();
+				}
+			};
+			document.ondragstart = function() {
+				if (event.target.tagName != 'INPUT' && event.target.tagName != 'TEXTAREA') {
+					event.preventDefault();
+				}
+			};
+			/*]]>*/
+		</script>
+					<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+				;
+				(function($, w) {
+					'use strict';
+					let $window = $(w);
+
+					$(document).ready(function() {
+
+						let isEnable = "";
+						let isEnableLazyMove = "";
+						let speed = isEnableLazyMove ? '0.7' : '0.2';
+
+						if( !isEnable ) {
+							return;
+						}
+
+						if (typeof haCursor == 'undefined' || haCursor == null) {
+							initiateHaCursorObject(speed);
+						}
+
+						setTimeout(function() {
+							let targetCursor = $('.ha-cursor');
+							if (targetCursor) {
+								if (!isEnable) {
+									$('body').removeClass('hm-init-default-cursor-none');
+									$('.ha-cursor').addClass('ha-init-hide');
+								} else {
+									$('body').addClass('hm-init-default-cursor-none');
+									$('.ha-cursor').removeClass('ha-init-hide');
+								}
+							}
+						}, 500);
+
+					});
+
+				}(jQuery, window));
+			});</script>
+		
+					<script type="rocketlazyloadscript">
+				const lazyloadRunObserver = () => {
+					const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+					const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+						entries.forEach( ( entry ) => {
+							if ( entry.isIntersecting ) {
+								let lazyloadBackground = entry.target;
+								if( lazyloadBackground ) {
+									lazyloadBackground.classList.add( 'e-lazyloaded' );
+								}
+								lazyloadBackgroundObserver.unobserve( entry.target );
+							}
+						});
+					}, { rootMargin: '200px 0px 200px 0px' } );
+					lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+						lazyloadBackgroundObserver.observe( lazyloadBackground );
+					} );
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+				events.forEach( ( event ) => {
+					document.addEventListener( event, lazyloadRunObserver );
+				} );
+			</script>
+			
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"\/mce-mck\/|\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/aa-admin\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/amoraria.com.br","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://amoraria.com.br/wp-content/cache/min/1/wp-content/themes/hello-elementor/assets/js/hello-frontend.js?ver=1758807659" id="hello-theme-frontend-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.32.2" id="elementor-webpack-runtime-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.32.2" id="elementor-frontend-modules-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js" defer></script>
+<script type="rocketlazyloadscript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Compartilhar no Facebook","shareOnTwitter":"Compartilhar no Twitter","pinIt":"Fixar","download":"Baixar","downloadImage":"Baixar imagem","fullscreen":"Tela cheia","zoom":"Zoom","share":"Compartilhar","playVideo":"Reproduzir v\u00eddeo","previous":"Anterior","next":"Pr\u00f3ximo","close":"Fechar","a11yCarouselPrevSlideMessage":"Slide anterior","a11yCarouselNextSlideMessage":"Pr\u00f3ximo slide","a11yCarouselFirstSlideMessage":"Este \u00e9 o primeiro slide","a11yCarouselLastSlideMessage":"Este \u00e9 o \u00faltimo slide","a11yCarouselPaginationBulletMessage":"Ir para o slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Dispositivos m\u00f3veis no modo retrato","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Dispositivos m\u00f3veis no modo paisagem","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet no modo retrato","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet no modo paisagem","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Notebook","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Tela ampla (widescreen)","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"3.32.2","is_static":false,"experimentalFeatures":{"additional_custom_breakpoints":true,"container":true,"theme_builder_v2":true,"hello-theme-header-footer":true,"nested-elements":true,"home_screen":true,"global_classes_should_enforce_capabilities":true,"e_variables":true,"cloud-library":true,"e_opt_in_v4_page":true,"import-export-customization":true,"page-transitions":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/amoraria.com.br\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/amoraria.com.br\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/amoraria.com.br\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"2ec04c4242"},"swiperClass":"swiper","settings":{"page":{"ha_cmc_init_switcher":"no"},"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","hello_header_logo_type":"title","hello_header_menu_layout":"horizontal","hello_footer_logo_type":"logo","ha_rpb_enable":"no"},"post":{"id":2565,"title":"Clube%20%E2%80%93%20Amoraria","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.32.2" id="elementor-frontend-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor-pro/assets/lib/lottie/lottie.min.js?ver=5.6.6" id="lottie-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/happy-elementor-addons/assets/js/extension-reading-progress-bar.min.js?ver=3.20.1" id="happy-reading-progress-bar-js" defer></script>
+<script id="happy-elementor-addons-js-extra">
+var HappyLocalize = {"ajax_url":"https:\/\/amoraria.com.br\/wp-admin\/admin-ajax.php","nonce":"ebe0f25158","pdf_js_lib":"https:\/\/amoraria.com.br\/wp-content\/plugins\/happy-elementor-addons\/assets\/vendor\/pdfjs\/lib"};
+</script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/happy-elementor-addons/assets/js/happy-addons.min.js?ver=3.20.1" id="happy-elementor-addons-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.6.5" id="elementor-pro-webpack-runtime-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="rocketlazyloadscript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/amoraria.com.br\/wp-admin\/admin-ajax.php","nonce":"4aba78b688","urls":{"assets":"https:\/\/amoraria.com.br\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/amoraria.com.br\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"pt_BR","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/amoraria.com.br\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.6.5" id="elementor-pro-frontend-js" defer></script>
+<script type="rocketlazyloadscript" src="https://amoraria.com.br/wp-content/plugins/elementor-pro/assets/js/preloaded-elements-handlers.min.js?ver=3.6.5" id="pro-preloaded-elements-handlers-js" defer></script>
+<script id="fme-custom-mask-script-js-extra">
+var fmeData = {"pluginUrl":"https:\/\/amoraria.com.br\/wp-content\/plugins\/form-masks-for-elementor\/","errorMessages":{"mask-cnpj":"Invalid CNPJ.","mask-cpf":"Invalid CPF.","mask-cep":"Invalid CEP (XXXXX-XXX).","mask-phus":"Invalid number: (123) 456-7890","mask-ph8":"Invalid number: 1234-5678","mask-ddd8":"Invalid number: (DDD) 1234-5678","mask-ddd9":"Invalid number: (DDD) 91234-5678","mask-dmy":"Invalid date: dd\/mm\/yyyy","mask-mdy":"Invalid date: mm\/dd\/yyyy","mask-hms":"Invalid time: hh:mm:ss","mask-hm":"Invalid time: hh:mm","mask-dmyhm":"Invalid date: dd\/mm\/yyyy hh:mm","mask-mdyhm":"Invalid date: mm\/dd\/yyyy hh:mm","mask-my":"Invalid date: mm\/yyyy","mask-ccs":"Invalid credit card number.","mask-cch":"Invalid credit card number.","mask-ccmy":"Invalid date.","mask-ccmyy":"Invalid date.","mask-ipv4":"Invalid IPv4 address."}};
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://amoraria.com.br/wp-content/cache/min/1/wp-content/plugins/form-masks-for-elementor/assets/js/custom-mask-script.js?ver=1758807659" id="fme-custom-mask-script-js" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://amoraria.com.br/wp-content/cache/min/1/wp-content/plugins/form-masks-for-elementor/assets/js/new-input-mask.js?ver=1758807659" id="fme-new-input-mask-js" defer></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://amoraria.com.br/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img loading="lazy" data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<div class="play"></div>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.dataset.query.length?'':'&'+this.dataset.query;e.setAttribute("src",t.replace("ID",this.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.replaceChild(e,this)}document.addEventListener("DOMContentLoaded",function(){var e,t,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),e.onclick=lazyLoadYoutubeIframe,a[t].appendChild(e)});</script>	<script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script></body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1759037361 -->
